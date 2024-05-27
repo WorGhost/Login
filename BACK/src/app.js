@@ -4,7 +4,8 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 import authRoutes from './routes/auth.js'
-import taskRoutes from './routes/task.js'
+import hourRoutes from './routes/hour.js'
+import proyectRoutes from './routes/proyect.js'
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 
 app.use("/api", authRoutes)
-app.use("/api", taskRoutes)
+app.use("/api", hourRoutes)
+app.use("/api", proyectRoutes)
 
 export default app
