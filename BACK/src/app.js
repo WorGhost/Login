@@ -3,9 +3,12 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
+
 import authRoutes from './routes/auth.js'
+import projectRoutes from './routes/project.js'
 import hourRoutes from './routes/hour.js'
-import proyectRoutes from './routes/proyect.js'
+import phasesRoutes from './routes/phase.js'
+
 
 const app = express()
 
@@ -26,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.use("/api", authRoutes)
 app.use("/api", hourRoutes)
-app.use("/api", proyectRoutes)
+app.use("/api", projectRoutes)
+app.use("/api", phasesRoutes)
 
 export default app

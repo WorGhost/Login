@@ -72,6 +72,7 @@ export const login = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
+      isAdmin: userFound.isAdmin
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -97,6 +98,7 @@ export const profile = async (req, res) => {
     id: userFound._id,
     username: userFound.username,
     email: userFound.email,
+    isAdmin: userFound.isAdmin
   });
 };
 
@@ -114,6 +116,7 @@ export const verifyToken = async (req, res) => {
       id: userFound.id,
       username: userFound.username,
       email: userFound.email,
+      isAdmin: userFound.isAdmin
     });
   });
 };

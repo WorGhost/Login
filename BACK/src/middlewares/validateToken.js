@@ -3,8 +3,9 @@ import { TOKEN } from '../config.js'
 
 export const authRequire = (req,res,next) => {
 
+    try { 
     const {token} = req.cookies
-
+    //const token = req.headers.authorization;
     if(!token) return res.status(401).json({
         message : "Authorization denied"
     })
@@ -19,4 +20,9 @@ export const authRequire = (req,res,next) => {
 
     next()
 
+    } catch (error) {
+        return res.status(401).json({
+            message : "Authorization denied"
+        })
+    }
 }

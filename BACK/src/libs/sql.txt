@@ -1,0 +1,16 @@
+DELETE FROM public.account_move WHERE 1=1;
+DELETE FROM public.account_move_line WHERE 1=1;
+DELETE FROM public.sale_order WHERE 1=1;
+DELETE FROM public.purchase_order WHERE 1=1;
+DELETE FROM public.purchase_requisition WHERE 1=1;
+DELETE FROM public.product_attribute WHERE 1=1;
+DELETE FROM public.product_product WHERE 1=1;
+DELETE FROM public.stock_quant WHERE 1=1;
+DELETE FROM public.stock_picking WHERE 1=1;
+DELETE FROM public.stock_move_line WHERE 1=1;
+DELETE FROM public.stock_move WHERE 1=1;
+DELETE FROM public.product_variant_combination WHERE 1=1;
+DELETE FROM public.account_partial_reconcile WHERE 1=1;
+DELETE FROM public.pos_order WHERE 1=1;
+DELETE FROM public.pos_session WHERE 1=1;
+DELETE FROM public.pos_config WHERE 1=1;
