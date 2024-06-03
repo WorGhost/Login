@@ -1,60 +1,59 @@
-import Hour from '../models/hour.js'
+import Hour from "../models/hour.js";
+import Phase from "../models/phases.js";
 
 export const createHour = async (req, res) => {
+  const idPhase = req.params.idPhase;
+  const { hours, description, date } = req.body;
 
-    const {title, description, date} = req.body
+  const hour = new Hour({
+    hours,
+    description,
+    date,
+    user: req.user.id,
+  });
 
-    const newhour = new hour({
-        title,
-        description,
-        date,
-        user : req.user.id
-    })
+  hour.phase = idPhase;
+  const newHour = await hour.save();
 
-    await newhour.save()
+  const updatePhase = await Phase.findByIdAndUpdate(idPhase,
+    {
+      $push: { hour: hour._id }
+    },
+    { new: true }
+  )
 
-    res.json(newhour)
+  res.status(200).send(newHour)
+};
 
-}
+export const getHours = async (req, res) => {
+  const id = req.params.idPhase;
+  const hours = await Hour.find({
+    phase : id
+  });
 
-export const getHours = async (req ,res) => {
-    const hours = await Hour.find({
-        user : req.user.id
-    })
+  res.status(200).send(hours);
+};
 
-    res.json(hours)
-}
+export const editHours = async (req, res) => {
+  const hour = await Hour.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
-export const getHour = async (req ,res) => {
-    const hour = await Hour.findById(req.params.id)
- 
-    if (!hour) return res.status(404).json({
-        message : "hour not found"
-    })
+  if (!hour)
+    return res.status(404).json({
+      message: "hour not found",
+    });
 
-    res.json(hour)
-}
+  res.json(hour);
+};
 
-export const editHours = async (req ,res) => {
+export const deleteHours = async (req, res) => {
+  const hour = await Hour.findByIdAndDelete(req.params.id);
 
-    const hour = await Hour.findByIdAndUpdate(req.params.id, req.body, {
-        new : true
-    })
- 
-    if (!hour) return res.status(404).json({
-        message : "hour not found"
-    })
+  if (!hour)
+    return res.status(404).json({
+      message: "hour not found",
+    });
 
-    res.json(hour)
-
-}
-
-export const deleteHours = async (req ,res) => {
-    const hour = await Hour.findByIdAndDelete(req.params.id)
- 
-    if (!hour) return res.status(404).json({
-        message : "hour not found"
-    })
-
-    return res.status(204)
-}
+  return res.status(204);
+};

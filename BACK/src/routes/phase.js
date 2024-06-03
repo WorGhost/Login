@@ -1,10 +1,22 @@
-import Router from 'express'
-import { createPhase } from '../controllers/phase.js'
-import { authRequire } from '../middlewares/validateToken.js'
+import Router from "express";
+import {
+  createPhase,
+  viewPhase,
+  deletePhase,
+  editPhase,
+} from "../controllers/phase.js";
+import { authRequire } from "../middlewares/validateToken.js";
 
-const router = Router()
+const router = Router();
 
-router.route('/project/:idProject/phase')
-   .post( authRequire,createPhase)
+router
+  .route("/project/:idProject/phase")
+  .post(authRequire, createPhase)
+  .get(authRequire, viewPhase);
 
-export default router
+router
+  .route("/project/:idProject/phase/:idPhase")
+  .delete(authRequire, deletePhase)
+  .put(authRequire, editPhase);
+
+export default router;

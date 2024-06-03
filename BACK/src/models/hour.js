@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
 const hourSchema = new mongoose.Schema({
-    title : {
-        type : String,
+    hours : {
+        type : Number,
         required : true
     },
     description : {
@@ -17,6 +17,11 @@ const hourSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref : 'User',
         required : true
+    }, 
+    phase: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Phase',
+        
     }
 
 }, {

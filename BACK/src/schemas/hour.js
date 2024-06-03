@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const createHourSchema = z.object({
-  title: z.string({
-    required_error: "Title is required",
+  hours: z.number({
+    required_error: "Hour is required",
   }),
   description: z
     .string({

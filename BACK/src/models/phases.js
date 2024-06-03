@@ -1,25 +1,28 @@
 import mongoose from "mongoose";
 
-const phaseSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true
+const phaseSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    date : {
-        type : Date,
-        default : Date.now
+    date: {
+      type: Date,
+      default: Date.now,
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : 'User',
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     hour: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : 'hours',
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "hours",
+    },
+    project: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-}, {
-    timestamps : true
-})
-
-export default mongoose.model('Phase', phaseSchema)
+export default mongoose.model("Phase", phaseSchema);
